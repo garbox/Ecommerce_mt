@@ -6,7 +6,7 @@ use App\Models\ProductAttribute;
 use App\Models\CartAttribute;
 use App\Models\Cart;
 use App\Models\Status;
-use App\Models\Orderitem;
+use App\Models\OrderItem;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +21,7 @@ class Order extends Model
         $attrInfo = collect();
         $prodAttrCost = 0;
         $orderId = Order::where('user_id', session()->get('id'))->where('id', $id)->first();
-        $orderitem = Orderitem::where('order_id', $orderId['id'])->get();
+        $orderitem = OrderItem::where('order_id', $orderId['id'])->get();
 
         foreach ($orderitem as $cart) {
             $prodId = Cart::find($cart->id);
