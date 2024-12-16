@@ -18,7 +18,7 @@ class Production
             if (Auth::user()->role_id == 1 || Auth::user()->role_id() == 3) {
                 return $next($request);
             }
-            return redirect('/user/login');
+            return redirect('/login');
         }      
     }
 }

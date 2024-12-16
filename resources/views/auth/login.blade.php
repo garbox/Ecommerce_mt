@@ -17,10 +17,15 @@
                 <div class="card-header text-center">
                     <h3>Log In</h3>
                     @if ($errors->has('error'))
-                    <div class="alert alert-danger">
-                        <h6>{{ $errors->first('error') }}</h6>
-                    </div>
-                @endif
+                        <div class="alert alert-danger">
+                            {{ $errors->first('error') }}
+                        </div>
+                    @endif
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <form action="/user/login" method="POST" id='login'>
@@ -33,7 +38,7 @@
                         <!-- Email Field -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control bg-danger-light" id="password" name="password" placeholder="Enter password" required>
                         </div>
 
                         <!-- Submit Button -->

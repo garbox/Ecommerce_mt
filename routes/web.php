@@ -39,7 +39,7 @@ Route::post('/user/login', [UserController::class , 'login']);
 Route::get('/user/logout', [UserController::class , 'logout']);
 
 //Checkout
-Route::get('checkout', [CheckoutController::class , 'index'])->name("checkout");
+Route::get('checkout', [CheckoutController::class , 'index'])->name("checkout")->middleware(User::class);
 
 /*Admin/Production Facing */
 //Dashboard 
