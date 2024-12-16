@@ -44,20 +44,16 @@
                             <label for="state" class="form-label">State</label>
                             <select class="form-select" id="state" name="state" required>
                                 <option >Select state</option>
-                                @foreach($stAbb as $stAbb)
-                                    @if(isset($user->state) && $user->state == $stAbb->abbreviation))
-                                        <option value="{{$stAbb->abbreviation}}" selected >{{$stAbb->abbreviation}}</option>
+                                @foreach($states as $states)
+                                    @if(isset($user->state) && $user->state == $states->id))
+                                        <option value="{{$states->abbreviation}}" selected >{{$states->abbreviation}}</option>
                                     @else
-                                        <option value="{{$stAbb->abbreviation}}">{{$stAbb->abbreviation}}</option>
+                                        <option value="{{$states->abbreviation}}">{{$states->abbreviation}}</option>
                                     @endif
                                 @endforeach
                             </select>
                         </div>
             </form>
-            <div class="d-flex justify-content-between mt-4">
-                <a href="/" class="btn btn-secondary">Continue Shopping</a>
-                <a href="/placeorder" class="btn btn-primary">Place Order</a>
-            </div>
         </div>
         <!-- Left Column: Order Summary -->
         <div class="col-md-6">
@@ -91,8 +87,11 @@
                     </tr>
                 </tbody>
             </table>
-
+            <div class="d-flex justify-content-between mt-10">
+                <a href="/placeorder" class="btn btn-primary">Place Order</a>
+            </div>
         </div>
+        
     </div>
 </div>
 <!-- Footer -->
