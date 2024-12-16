@@ -63,7 +63,7 @@ use Illuminate\Support\Collection;
             <option value="">None</option>
             @isset($finish)
               @foreach ($finish as $finish)
-              <option value="{{$finish['id']}}">{{ucfirst($finish['attribute'])}} + ${{$finish['price']}}</option>
+              <option price="{{$finish['price']}}" value="{{$finish['id']}}">{{ucfirst($finish['attribute'])}} + ${{$finish['price']}}</option>
               @endforeach
             @endisset
           </select>
@@ -75,7 +75,7 @@ use Illuminate\Support\Collection;
           <select class="form-select" id="size" name="size" onchange="ChangeFunction()" required>  
             <option value="">None</option>
               @foreach ($size as $size)
-              <option value="{{$size['id']}}">{{$size['attribute']}} + ${{$size['price']}}</option>
+              <option price="{{$size['price']}}" value="{{$size['id']}}">{{$size['attribute']}} + ${{$size['price']}}</option>
               @endforeach
           </select>
           <hr/>
@@ -87,7 +87,7 @@ use Illuminate\Support\Collection;
           
           <option value="">None</option>
             @foreach ($legs as $legs)
-            <option value="{{$legs['id']}}">{{ucfirst($legs['attribute'])}} + ${{$legs['price']}}</option>
+            <option price="{{$legs['price']}}" value="{{$legs['id']}}">{{ucfirst($legs['attribute'])}} + ${{$legs['price']}}</option>
             @endforeach
             <input type="hidden" value="" name="finalPrice" id="finalPrice"/>
             <input type="hidden" value="{{$prod->id}}" name="productID" id="productID"/>
@@ -126,25 +126,44 @@ use Illuminate\Support\Collection;
 
   <script>
       window.onload = function() {ChangeFunction();};
-      
+
       function ChangeFunction() {
-        if(document.getElementById("finish").value == null){
+        if(document.getElementById('finish') != null){
+          let selectElement = document.getElementById('finish');
+          let selectedOption = selectElement.options[selectElement.selectedIndex];
+          let info = selectedOption.getAttribute('price');
+          finish = info;
+        }
+        else{ 
           finish = 0;
         }
-        if(document.getElementById("size").value == null){
+
+        if(document.getElementById('size') != null){
+          let selectElement = document.getElementById('size');
+          let selectedOption = selectElement.options[selectElement.selectedIndex];
+          let info = selectedOption.getAttribute('price');
+          size = info;
+        }
+        else{ 
           size = 0;
         }
-        if(document.getElementById("legs").value == null){
-          price[2] = 0;
+
+        if(document.getElementById('legs') != null){
+          let selectElement = document.getElementById('legs');
+          let selectedOption = selectElement.options[selectElement.selectedIndex];
+          let info = selectedOption.getAttribute('price');
+          legs = info;
+        }
+        else{ 
+          legs = 0;
         }
 
         var price = [
-          Number(document.getElementById("finish").value),
-          Number(document.getElementById("size").value),
-          Number(document.getElementById("legs").value),
+          Number(finish),
+          Number(size),
+          Number(legs),
           Number(document.getElementById("baseprice").innerHTML)
         ]
-        
         var newprice = price[3] + price[0] + price[1] + price[2];
         document.getElementById("price").innerHTML="".innerHTML="$" + newprice.toFixed(2);
         document.getElementById("finalPrice").innerHTML="".innerHTML=newprice.toFixed(2);
