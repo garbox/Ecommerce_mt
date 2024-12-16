@@ -70,7 +70,7 @@ class Cart extends Model
 
     public static function remove(Request $request){
         CartAttribute::where('cart_id', $request->id)->delete();
-        $this->find($request->id)->delete();
+        Cart::find($request->id)->delete();
     }
 
 
