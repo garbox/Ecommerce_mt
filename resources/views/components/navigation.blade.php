@@ -11,7 +11,7 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/">Shop</a>
+            <a class="nav-link" href="/store">Shop</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/cart">Cart</a>
@@ -19,6 +19,9 @@
           @if (session()->get('id') != null)
           <li class="nav-item">
             <a class="nav-link" href="/orderstatus">Order Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/user/logout">Log Out</a>
           </li>
           @else
           <li class="nav-item">

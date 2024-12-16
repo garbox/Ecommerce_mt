@@ -14,15 +14,8 @@ class ProductType extends Seeder
     public function run(): void
     {
         DB::table('product_types')->insert([
-            'name' => "table",
-        ]);
-
-        DB::table('product_types')->insert([
             'name' => "night stand",
         ]);
 
-        DB::table('product_types')->insert([
-            'name' => "credenza",
-        ]);
     }
 }

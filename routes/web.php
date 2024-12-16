@@ -16,7 +16,8 @@ use App\Http\Middleware\Production;
 
 /*Customer Facing*/
 //Home
-Route::get('/', [StoreController::class , 'index']);
+Route::view('/', 'frontpage');
+Route::get('/store', [StoreController::class , 'index']);
 
 Route::get('/orderstatus', [OrderController::class , 'index'])->name('orderstatus')->middleware(User::class);
 Route::get('/order/{id}', [OrderController::class , 'details'])->middleware(User::class);

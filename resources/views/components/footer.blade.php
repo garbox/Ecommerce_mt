@@ -1,5 +1,4 @@
-<!-- 
- <footer class=" bg-dark text-light text-center py-4 footer">
+<!--footer class=" bg-dark text-light text-center py-4 footer">
 
 <div class="container">
       <div class="row">
@@ -7,7 +6,7 @@
           <h5>Quick Links</h5>
           <ul class="list-unstyled">
             <li><a href="/" class="text-light">Home</a></li>
-            <li><a href="/" class="text-light">Shop</a></li>
+            <li><a href="/store" class="text-light">Shop</a></li>
             <li><a href="/cart" class="text-light">Cart</a></li>
             <li><a href="/dashboard" class="text-light">Dashboard</a></li>
           </ul>

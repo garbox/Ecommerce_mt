@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
       margin-bottom: 20px;
     }
     .product-image {
-      height: 200px;
+      height: 400px;
       object-fit: cover;
       border-radius: 10px;
     }
@@ -34,7 +34,7 @@ use Illuminate\Support\Collection;
     <div class="row">
         <!-- Product Image -->
         <div class="col-md-6">
-            <img src="https://via.placeholder.com/500" alt="Product Image" class="product-image mb-4">
+            <img src="{{asset('storage/'.$prod->img)}}" alt="Product Image" class="product-image mb-4">
         </div>
 
         <!-- Product Details -->
