@@ -20,7 +20,7 @@
                     <img type='file' style="width:300px" src="{{asset('storage/'.$prod->img)}}" class="card-img-top" alt="Product 1">
                     <div class="card-body">
                         <h5 class="card-title">{{$prod->name}}</h5>
-                        <p class="card-text">${{$prod->price}}</p>
+                        <p class="card-text"> Starting at ${{$prod->price}}</p>
                         <a href="/product/{{$prod->id}}" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
