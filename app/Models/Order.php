@@ -6,6 +6,7 @@ use App\Models\ProductAttribute;
 use App\Models\CartAttribute;
 use App\Models\Cart;
 use App\Models\Status;
+use App\Models\Orderitem;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
