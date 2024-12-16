@@ -1,4 +1,4 @@
-<!--footer class=" bg-dark text-light text-center py-4 footer">
+<footer class=" bg-dark text-light text-center py-4 footer mt-auto">
 
 <div class="container">
       <div class="row">
@@ -29,4 +29,4 @@
       <hr class="bg-white">
       <p class="m-0">&copy; 2024 Kyle Metivier. | Laravel Ecommerce Project.</p>
     </div>
-  </footer> -->
+  </footer> 

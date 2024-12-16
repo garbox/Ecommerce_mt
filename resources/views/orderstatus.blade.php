@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- nav -->
      <x-navigation/>
     <div class="container-fluid mt-5">
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-
+<x-footer/>
     <!-- Bootstrap JS and dependencies (optional for functionality) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

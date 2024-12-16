@@ -7,7 +7,7 @@
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
-<body>
+  <body class="d-flex flex-column min-vh-100">
 <x-navigation/>
 
   <div class="container my-5">
@@ -99,10 +99,7 @@
     </div>
   </div>
 
-  <!-- Footer Section -->
-  <footer class="bg-dark text-white text-center py-3 mt-5">
-    <p>&copy; 2024 Your Company. All rights reserved.</p>
-  </footer>
+  <x-footer/>
 
   <!-- Bootstrap 5 JS (Optional for interactive elements) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>

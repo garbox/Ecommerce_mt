@@ -12,7 +12,7 @@ class User
     public function handle(Request $request, Closure $next): Response
     {   
         if (is_null(Auth::user())){
-            return redirect('/');
+            return redirect('/login');
         }
         else {
             if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3 ) {
