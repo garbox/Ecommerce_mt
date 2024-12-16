@@ -48,52 +48,6 @@
             <div class="col-md-9 col-lg-10 p-4">
                 <h2 class="mb-4">Welcome, {{$user->name}}</h2>
 
-                <!-- Overview Section -->
-                <div class="row mb-5">
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Account Balance</h5>
-                                <p class="card-text">$1,230.45</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Recent Orders</h5>
-                                <ul class="list-unstyled">
-                                    @foreach ($orders as $order)
-                                        <li><a href="order/{{$order['id']}}">Invoice #{{$order['id']+1000}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">Account Settings</h5>
-                                <p class="card-text">Update personal information and preferences.</p>
-                                <a href="#" class="btn btn-info btn-sm">Edit Settings</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Personal Information Section -->
-                <div class="card shadow-sm mb-5">
-                    <div class="card-header">
-                        <h5 class="card-title">Personal Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Name:</strong> {{$user['name']}}</p>
-                        <p><strong>Email:</strong> {{$user['email']}}</p>
-                        <p><strong>Phone:</strong> {{$user['phone']}}</p>
-                        <a href="#" class="btn btn-info">Edit Personal Info</a>
-                    </div>
-                </div>
-
                 <!-- Recent Orders Section -->
                 <div class="card shadow-sm">
                     <div class="card-header">
@@ -112,8 +66,8 @@
                             <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                    <td>{{$order['id']+1000}}</td>
-                                    <td><span class="badge bg-primary">Shipped</span></td>
+                                    <td><a href="order/{{$order['id']}}">{{$order['id']+1000}}</a></td>
+                                    <td><span class="badge bg-primary">Queued</span></td>
                                     <td>{{date_format($order['created_at'], "m/d/Y")}}</td>
                                     <td>${{number_format($order['total_price'],2)}}</td>
                                 </tr>
@@ -122,6 +76,21 @@
                         </table>
                     </div>
                 </div>
+                <br>
+                <!-- Personal Information Section -->
+                <div class="card shadow-sm mb-5">
+                    <div class="card-header">
+                        <h5 class="card-title">Personal Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> {{$user['name']}}</p>
+                        <p><strong>Email:</strong> {{$user['email']}}</p>
+                        <p><strong>Phone:</strong> {{$user['phone']}}</p>
+                        <a href="#" class="btn btn-info">Edit Personal Info</a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

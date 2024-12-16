@@ -42,10 +42,10 @@
             <h5 class="card-title">Shipping Information</h5>
           </div>
           <div class="card-body">
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Address:</strong> 1234 Elm Street, Springfield, IL, 62701</p>
-            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
+            <p><strong>Name:</strong> {{Auth::user()->name}}</p>
+            <p><strong>Address:</strong> {{Auth::user()->address .', '. Auth::user()->city .', '. Auth::user()->state .', '. Auth::user()->zip}}</p>
+            <p><strong>Phone:</strong> {{Auth::user()->phone}}</p>
+            <p><strong>Email:</strong> {{Auth::user()->email}}</p>
           </div>
         </div>
       </div>
