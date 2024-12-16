@@ -1,6 +1,3 @@
-<?php
-dump($orderdetails);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
