@@ -59,7 +59,6 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             
-            $request->session()->regenerate();
             session()->put('id', Auth::user()->id);
             if (Auth::user()->role_id == 1){
                 return redirect()->intended('/dashboard'); // dashbboard redirect
