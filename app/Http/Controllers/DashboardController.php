@@ -43,13 +43,21 @@ class DashboardController extends Controller
 
     // Insert product 
     public function insertProduct(Request $request){
+        $request->validate([
+            'productImage' => 'required|file|mimes:jpeg,png|max:2048',  // Example validation
+        ]);
+
+        $filename = $request->file('productImage')->getClientOriginalName();
+
+        $request->file('productImage')->storeAs('', $filename);
+        
         Product::insert([
             'name' => strtolower($request->productName),
             'short_description' => strtolower($request->shortDescription),
             'long_description' => strtolower($request->longDescription),
             'price' => strtolower($request->productPrice),
             'product_type_id' => strtolower($request->productCategory),
-            'img' => strtolower($request->productImage),
+            'img' => strtolower($filename),
         ]);
 
         return redirect()->route('products');

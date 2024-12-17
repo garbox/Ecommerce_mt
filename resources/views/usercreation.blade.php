@@ -23,31 +23,43 @@
                         <!-- Name Field -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="name" name="name" value='{{ $user->name ?? '' }}' placeholder="Enter your full name"required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}" placeholder="Enter your full name"required>
+                            @error('name')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Email Field -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" value='{{ $user->email ?? '' }}' placeholder="Enter your email address" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" placeholder="Enter your email address" required>
+                            @error('email')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Phone Field -->
                         <div class="mb-3">
                             <label for="phone" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value='{{ $user->phone ?? '' }}' placeholder="Enter your phone number" required>
+                            <input type="tel" class="form-control" id="phone" name="phone" value="{{old('phone')}}" placeholder="Enter your phone number" required>
+                            @error('phone')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Address Field -->
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address" value='{{ $user->address ?? '' }}' placeholder="Enter your address" required>
+                            <input type="text" class="form-control" id="address" name="address" value="{{old('address')}}" placeholder="Enter your address" required>
+                            @error('address')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- State Field -->
                         <div class="mb-3">
                             <label for="state" class="form-label">State</label>
-                            <select class="form-select" id="state" name="state" required>
+                            <select class="form-select" id="state" name="state" value="{{old('state')}}" required>
                                 <option >Select state</option>
                                 @foreach($stAbb as $stAbb)
                                     @if(isset($user->state) && $user->state == $stAbb->abbreviation))
@@ -57,24 +69,36 @@
                                     @endif
                                 @endforeach
                             </select>
+                            @error('state')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                          <!-- City Field -->
                          <div class="mb-3">
                             <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-control" id="city" name="city" placeholder="Eneter city name" required>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name" value="{{old('city')}}" required>
+                            @error('city')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- ZIP Field -->
                         <div class="mb-3">
                             <label for="zip" class="form-label">ZIP Code</label>
-                            <input type="text" class="form-control" id="zip" name="zip" value='{{ $user->zip ?? '' }}' placeholder="Enter your ZIP code" required>
+                            <input type="text" class="form-control" id="zip" name="zip" value="{{old('zip')}}" placeholder="Enter your ZIP code" required>
+                            @error('zip')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- password Field -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Create password</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="Create your password" required>
+                            @error('password')
+                                    <div style="color: red;">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Submit Button -->
@@ -84,15 +108,6 @@
                 <div class="card-footer text-center">
                     <p>Already have an account? <a href="/login">Login here</a></p>
                 </div>
-                <div class="card">
-                @foreach ($errors->all() as $error)
-                    <div class="alert alert-danger">
-                        <ul>
-                            <li>{{ $error }}</li>
-                        </ul>
-                    </div>
-                @endforeach
-            </div>
             </div>
         </div>
     </div>

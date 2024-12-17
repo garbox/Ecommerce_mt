@@ -20,31 +20,31 @@
       <!-- Product Name -->
       <div class="mb-3">
         <label for="productName" class="form-label">Product Name</label>
-        <input type="text" class="form-control" id="productName" name="productName" required>
+        <input value="{{old('productName')}}" type="text" class="form-control" id="productName" name="productName" required>
       </div>
 
       <!-- Product Description -->
       <div class="mb-3">
         <label for="productDescription" class="form-label">Short Description</label>
-        <textarea class="form-control" id="shortDescription" name="shortDescription" rows="3" required></textarea>
+        <textarea class="form-control" id="shortDescription" name="shortDescription" rows="3" required>{{old('shortDescription')}}</textarea>
       </div>
       
       <!-- Product Description -->
       <div class="mb-3">
         <label for="productDescription" class="form-label">Long Description</label>
-        <textarea class="form-control" id="longDescription" name="longDescription" rows="3" required></textarea>
+        <textarea value="{{old('longDescription')}}" class="form-control" id="longDescription" name="longDescription" rows="3" required>{{old('shortDescription')}} </textarea>
       </div>
 
       <!-- Price -->
       <div class="mb-3">
         <label for="productPrice" class="form-label">Price ($)</label>
-        <input type="number" class="form-control" id="productPrice" name="productPrice" step="0.01" required>
+        <input value="{{old('productPrice')}}" type="number" class="form-control" id="productPrice" name="productPrice" step="0.01" required>
       </div>
 
       <!-- Category -->
       <div class="mb-3">
         <label for="productCategory" class="form-label">Funitiure Type</label>
-        <select class="form-select" id="productCategory" name="productCategory" required>
+        <select value="{{old('productCategory')}}" class="form-select" id="productCategory" name="productCategory" required>
           <option value="" disabled selected>Select type</option>
           @foreach ($prodType as $prodType)
           <option value="{{$prodType->id}}" >{{ucfirst($prodType->name)}}</option>
@@ -56,6 +56,9 @@
       <div class="mb-3">
         <label for="productImage" class="form-label">Product Image</label>
         <input type="file" class="form-control" id="productImage" name="productImage" accept="image/*" required>
+        @error('productImage')
+                <div style="color: red;">{{ $message }}</div>
+        @enderror
       </div>
 
       <!-- Submit Button -->
