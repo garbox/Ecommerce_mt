@@ -17,7 +17,7 @@ class ProdAttribute extends Seeder
             'product_type_id' => 1,
             'category' => "finish",
             'attribute' => "matte",
-            'price' => 49.99,
+            'price' => 0,
             
         ]); 
 
@@ -41,7 +41,7 @@ class ProdAttribute extends Seeder
             'product_type_id' => 1,
             'category' => "size",
             'attribute' => '15" x 13"',
-            'price' => 100,
+            'price' => 0,
             
         ]);
 
@@ -57,7 +57,7 @@ class ProdAttribute extends Seeder
             'product_type_id' => 1,
             'category' => "size",
             'attribute' => '16"x16"',
-            'price' => 130,
+            'price' => 140,
             
         ]); 
     }
