@@ -52,11 +52,11 @@ class DashboardController extends Controller
         $request->file('productImage')->storeAs('', $filename);
         
         Product::insert([
-            'name' => strtolower($request->productName),
-            'short_description' => strtolower($request->shortDescription),
-            'long_description' => strtolower($request->longDescription),
-            'price' => strtolower($request->productPrice),
-            'product_type_id' => strtolower($request->productCategory),
+            'name' => ucwords($request->productName),
+            'short_description' => $request->shortDescription,
+            'long_description' => $request->longDescription,
+            'price' => $request->productPrice,
+            'product_type_id' => $request->productCategory,
             'img' => strtolower($filename),
         ]);
 
