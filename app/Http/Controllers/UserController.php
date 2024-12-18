@@ -51,7 +51,11 @@ class UserController extends Controller
         return view('auth.login');
     }
 
-    public function login(LoginRequest $request): RedirectResponse{
+    public function login (){
+        return view("auth.login");
+    }
+
+    public function varifyLogin(LoginRequest $request): RedirectResponse{
             $credentials = $request->validate([
                 'email' => ['required', 'email'],
                 'password' => ['required'],
@@ -63,7 +67,7 @@ class UserController extends Controller
             if (Auth::user()->role_id == 1){
                 return redirect()->intended('/dashboard'); // dashbboard redirect
             }
-            return redirect()->intended('/orderstatus'); // orderstatus redirect
+            return redirect()->intended('/cart'); // cart redirect
         }
         return back()->withErrors(['error' => 'Invalid credentials']);
     }

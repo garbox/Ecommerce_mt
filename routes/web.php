@@ -32,10 +32,10 @@ Route::post('cart/add', [CartController::class , 'addToCart']);
 Route::post('cart/remove', [CartController::class , 'removeFromCart']);
 
 //User Routes
-Route::view('/login', 'auth.login');
+Route::get('/login', [UserController::class , 'login']);
 Route::get('/user', [UserController::class , 'index'])->name('user');
 Route::post('/user/create', [UserController::class , 'create']);
-Route::post('/user/login', [UserController::class , 'login']);
+Route::post('/user/login', [UserController::class , 'varifyLogin']);
 Route::get('/user/logout', [UserController::class , 'logout']);
 
 //Checkout
