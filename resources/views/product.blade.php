@@ -88,15 +88,14 @@ use Illuminate\Support\Collection;
             @foreach ($legs as $legs)
             <option price="{{$legs['price']}}" value="{{$legs['id']}}">{{ucfirst($legs['attribute'])}} + ${{$legs['price']}}</option>
             @endforeach
-            <input type="hidden" value="" name="finalPrice" id="finalPrice"/>
-            <input type="hidden" value="{{$prod->id}}" name="productID" id="productID"/>
         </select>
         <br>
         @endif
         <input type="hidden" value="" name="finalPrice" id="finalPrice"/>
         <input type="hidden" value="{{$prod->id}}" name="productID" id="productID"/>
+
         <label for="legs" class="form-label">Quantity</label>
-        <input type="number" name="quantity" class="form-control" value="1" min="1" style="width: 60px;">
+        <input onchange="ChangeFunction()" id="quantity" type="number" name="quantity" class="form-control" value="1" min="1" style="width: 60px;">
         <hr>
         <button type="submit" class="btn btn-primary">Add To Cart</button>
         </div>
@@ -155,18 +154,21 @@ use Illuminate\Support\Collection;
         }
         else{ 
           legs = 0;
-        }
+        } 
 
         var price = [
           Number(finish),
           Number(size),
           Number(legs),
-          Number(document.getElementById("baseprice").innerHTML)
+          Number(document.getElementById("baseprice").innerHTML),
+          Number(document.getElementById("quantity").value),
         ]
         var newprice = price[3] + price[0] + price[1] + price[2];
-        document.getElementById("price").innerHTML="".innerHTML="$" + newprice.toFixed(2);
+        var totalPrice = newprice * price[4];
+        document.getElementById("price").innerHTML="".innerHTML="$" + totalPrice.toFixed(2);
         document.getElementById("finalPrice").innerHTML="".innerHTML=newprice.toFixed(2);
         document.getElementById("finalPrice").value = newprice;
+        console.log(document.getElementById("finalPrice").value);
       }
     </script>
 </body>
