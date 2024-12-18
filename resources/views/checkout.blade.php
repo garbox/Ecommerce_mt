@@ -15,7 +15,7 @@
 
     <div class="row">
                 <!-- Right Column: Billing and Shipping Form -->
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3">
             <h4>Billing Information</h4>
             <form>
                 @csrf
@@ -56,7 +56,7 @@
             </form>
         </div>
         <!-- Left Column: Order Summary -->
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <h4>Order Summary</h4>
             <table class="table">
                 <thead>
