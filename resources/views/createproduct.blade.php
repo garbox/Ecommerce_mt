@@ -32,7 +32,7 @@
       <!-- Product Description -->
       <div class="mb-3">
         <label for="productDescription" class="form-label">Long Description</label>
-        <textarea value="{{old('longDescription')}}" class="form-control" id="longDescription" name="longDescription" rows="3" required>{{old('shortDescription')}} </textarea>
+        <textarea value="{{old('longDescription')}}" class="form-control" id="longDescription" name="longDescription" rows="3" required>{{old('longDescription')}} </textarea>
       </div>
 
       <!-- Price -->
