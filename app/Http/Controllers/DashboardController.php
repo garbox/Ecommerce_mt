@@ -74,7 +74,7 @@ class DashboardController extends Controller
     //Show type
     public function showType(){
         $prodType = ProductType::all();
-        return view('createType', ['prodType' => $prodType]);
+        return view('createtype', ['prodType' => $prodType]);
     }
 
     // Insert type 
