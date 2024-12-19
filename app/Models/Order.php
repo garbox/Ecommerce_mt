@@ -120,4 +120,50 @@ class Order extends Model
             return $alldtails;
     }
 
+    public static function getDeatils2($id){
+        $orderDeets = collect();
+        $cart = collect();
+        $order = Order::find($id);
+        $status = Status::find($order->status_id);
+        $user = User::find($order->user_id);
+        $orderItems = OrderItem::where('order_id' , $order->id)->get();
+
+        // create main cart array here -->
+        foreach ($orderItems as $orderItem){
+            $cartattrs = CartAttribute::where('cart_id', $orderItem->cart_id)->get();
+            $cartProdId = Cart::find($orderItem->cart_id);
+            $product = Product::find($cartProdId->product_id);
+            $cartArray = collect();
+
+            // Get product attr info -->
+            foreach ($cartattrs as $cartattr){
+                $prodAttr = ProductAttribute::find($cartattr->product_attribute_id);
+                $cartArray->put($prodAttr->category , $prodAttr->attribute);
+            }
+
+            // set cart with product name and the cart array of attr
+            $cart->push([
+                'prodname' => $product->name,
+                'prodAttr' => $cartArray,
+                'quantity' => $cartProdId->quantity,
+            ]);
+        }
+
+        // set final data points for order details
+        $orderDeets = [
+            "order" => $id,
+            "totalprice" => $order->total_price,
+            "status" => $status,
+            "orderdate" => $order->created_at,
+            "username" => $user->name,
+            "phone" => $user->phone,
+            "email" => $user->email,
+            "address" => $user->address,
+            "zip" => $user->zip,
+            "state" => $user->state,
+            "cart" => $cart,
+        ];
+
+        return (object) $orderDeets;
+    }
 }
