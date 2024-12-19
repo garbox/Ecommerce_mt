@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductType;
 use App\Models\Product;
 use App\Models\Cookie;
+use App\Models\Status;
 use App\Models\Order;
 use App\Models\Role;
 use Illuminate\Support\Collection;
@@ -108,5 +109,10 @@ class DashboardController extends Controller
         Product::updateProduct($request);
 
         return view('dashboardproducts', ['products' => Product::all()]);
+    }
+
+    public function orderDetails(int $id){
+
+        return view('dashboard.orderDetails', ['order' => Order::getDeatils2($id), "status" => Status::all()]);
     }
 }

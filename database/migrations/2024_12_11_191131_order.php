@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Status;
 
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent();    
             $table->timestamp('updated_at')->useCurrent(); 
         });
+
+        DB::statement("ALTER TABLE orders AUTO_INCREMENT = 1000;");
     }
 
     /**
