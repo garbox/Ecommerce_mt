@@ -48,6 +48,7 @@ Route::get('dashboard', [DashboardController::class , 'index'])->name("dashboard
 // Dashboard Products
 Route::get('dashboard/products', [DashboardController::class , 'showProducts'])->name('products')->middleware(Admin::class);
 Route::get('dashboard/products/edit/{id}', [DashboardController::class , 'editProducts'])->name('productedit')->middleware(Admin::class);
+Route::post('dashboard/products/edit/update', [DashboardController::class , 'updateProducts'])->middleware(Admin::class);
 Route::post('dashboard/products/delete', [DashboardController::class , 'deleteProducts'])->middleware(Admin::class);
 
 Route::get('dashboard/createproduct', [DashboardController::class , 'createProduct'])->name('createproduct')->middleware(Admin::class);

@@ -41,7 +41,7 @@
             <button name="id" value="{{$products->id}}" class="btn btn-sm btn-outline-danger">Delete</button>
           </form>
         </td>
-        <td><button id="edit" value="{{$products->id}}" class="btn btn-sm btn-outline-success">Edit</button></td>
+        <td><a href="/dashboard/products/edit/{{$products->id}}"><button id="edit" value="" class="btn btn-sm btn-outline-success">Edit</button></a></td>
       </tr>
       @endforeach
     @endisset

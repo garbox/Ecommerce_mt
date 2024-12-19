@@ -44,7 +44,7 @@ class DashboardController extends Controller
     // Insert product 
     public function insertProduct(Request $request){
         $request->validate([
-            'productImage' => 'required|file|mimes:jpeg,png|max:2048',  // Example validation
+            'productImage' => 'required|file|mimes:jpeg,png|max:2048', 
         ]);
 
         $filename = $request->file('productImage')->getClientOriginalName();
@@ -96,5 +96,17 @@ class DashboardController extends Controller
         $product = Product::find($id)->first();
         $prodType = ProductType::all();
         return view('dashboard.productEdit', ['product' => $product, 'prodType' => $prodType]);
+    }
+
+    public function updateProducts(Request $request){
+        //validation 
+        //check if image is empty, if so no file update. 
+
+        $request->validate([
+            'productImage' => 'nullable|file|mimes:jpeg,png|max:2048',  // Example validation
+        ]);
+        Product::updateProduct($request);
+
+        return view('dashboardproducts', ['products' => Product::all()]);
     }
 }
