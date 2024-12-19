@@ -21,15 +21,17 @@
       <th scope="col">Invoice</th>
       <th scope="col">Status</th>
       <th scope="col">Date Ordered</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     @foreach ($orderDetails as $order)
     <td>{{$order['userName']}}</td>
     <td>{{$order['prodName']}}</td>
-    <td>{{$order['orderId'] + 1000}}</td>
+    <td><a href="/dashboard/order/{{$order['orderId']}}">{{$order['orderId']}}</a></td>
     <td>{{$order['status']}}</td>
     <td>{{$order['date']}}</td>
+    <td><a href="/dashboard/order/{{$order['orderId']}}"><button class="btn btn-sm btn-primary">Update Status</button></a></td>
     </tr>
     @endforeach
   </tbody>

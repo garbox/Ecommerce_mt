@@ -66,8 +66,18 @@
                             <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                    <td><a href="order/{{$order['id']}}">{{$order['id']+1000}}</a></td>
-                                    <td><span class="badge bg-primary">Queued</span></td>
+                                    <td><a href="order/{{$order['id']}}">{{$order['id']}}</a></td>
+                                    <td>
+                                        @if ($order['status_id'] >= 6)
+                                        <span class="badge bg-success">
+                                        {{$order['status_id']}}
+                                        </span>
+                                        @else
+                                        <span class="badge bg-primary">
+                                            {{$order['status_id']}}
+                                        </span>
+                                        @endif 
+                                    </td>
                                     <td>{{date_format($order['created_at'], "m/d/Y")}}</td>
                                     <td>${{number_format($order['total_price'],2)}}</td>
                                 </tr>

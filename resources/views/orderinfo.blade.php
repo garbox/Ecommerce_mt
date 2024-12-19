@@ -14,7 +14,7 @@
     <!-- Page Header -->
     <div class="text-center mb-4">
       <h1 class="display-4">Order Information</h1>
-      <p class="lead">Details for Order #{{$id + 1000}}</p>
+      <p class="lead">Details for Order #{{$id}}</p>
     </div>
 
     <!-- Order Details Section -->
@@ -27,7 +27,7 @@
             <h5 class="card-title">Order Summary</h5>
           </div>
           <div class="card-body">
-            <p><strong>Order ID:</strong> {{$id + 1000}}</p>
+            <p><strong>Order ID:</strong> {{$id}}</p>
             <p><strong>Order Date:</strong> {{date_format($orderInfo['created_at'],"m/d/Y");}}</p>
             <p><strong>Status:</strong> {{$status->status}}</p>
             <p><strong>Total Amount:</strong> ${{number_format($orderInfo['total_price'],2)}}</p>
