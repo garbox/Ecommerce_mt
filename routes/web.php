@@ -19,7 +19,7 @@ use App\Http\Middleware\Production;
 Route::view('/', 'frontpage');
 Route::get('/store', [StoreController::class , 'index']);
 
-Route::get('/orderstatus', [OrderController::class , 'index'])->name('orderStatus')->middleware(User::class);
+Route::get('/orderstatus', [OrderController::class , 'index'])->name('orderstatus')->middleware(User::class);
 Route::get('/order/{id}', [OrderController::class , 'details'])->middleware(User::class);
 Route::get('/placeorder', [OrderController::class , 'create']);
 
@@ -47,19 +47,19 @@ Route::get('dashboard', [DashboardController::class , 'index'])->name("dashboard
 
 // Dashboard Products
 Route::get('dashboard/products', [DashboardController::class , 'showProducts'])->name('products')->middleware(Admin::class);
-Route::get('dashboard/products/edit/{id}', [DashboardController::class , 'editProducts'])->name('productEdit')->middleware(Admin::class);
+Route::get('dashboard/products/edit/{id}', [DashboardController::class , 'editProducts'])->name('productedit')->middleware(Admin::class);
 Route::post('dashboard/products/delete', [DashboardController::class , 'deleteProducts'])->middleware(Admin::class);
 
-Route::get('dashboard/createproduct', [DashboardController::class , 'createProduct'])->name('createProduct')->middleware(Admin::class);
+Route::get('dashboard/createproduct', [DashboardController::class , 'createProduct'])->name('createproduct')->middleware(Admin::class);
 Route::post('dashboard/createproduct', [DashboardController::class , 'insertProduct'])->middleware(Admin::class);
 
 // Dashbaord create type 
-Route::get('dashboard/createtype', [DashboardController::class , 'showType'])->name('createType')->middleware(Admin::class);
+Route::get('dashboard/createtype', [DashboardController::class , 'showType'])->name('createtype')->middleware(Admin::class);
 Route::post('dashboard/createtype', [DashboardController::class , 'insertType'])->middleware(Admin::class);
 Route::post('dashboard/createtype/delete', [DashboardController::class , 'deleteType'])->middleware(Admin::class);
 
 
 //Dashboard Create Attributes
-Route::get('dashboard/createattributes', [AttributeController::class , 'createAttributes'])->name('createAttributes')->middleware(Admin::class);
+Route::get('dashboard/createattributes', [AttributeController::class , 'createAttributes'])->name('createattributes')->middleware(Admin::class);
 Route::post('dashboard/createattributes', [AttributeController::class , 'insertAttribute'])->middleware(Admin::class);
 Route::post('dashboard/createattributes/delete', [AttributeController::class , 'deleteAttributes'])->middleware(Admin::class);

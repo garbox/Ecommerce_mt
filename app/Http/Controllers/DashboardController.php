@@ -81,7 +81,7 @@ class DashboardController extends Controller
     public function insertType(Request $request){
         ProductType::insert
         (['name' => strtolower($request->typeName)]);
-        return redirect()->route('createType');
+        return redirect()->route('createtype');
     }
 
     // Delete type 
@@ -89,7 +89,7 @@ class DashboardController extends Controller
         $deleteType = ProductType::find($request->id);
         $deleteType->delete();
         $prodType = ProductType::all();
-        return redirect()->route('createType');
+        return redirect()->route('createtype');
     }    
 
     public function editProducts(int $id){

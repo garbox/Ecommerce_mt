@@ -16,7 +16,7 @@ class AttributeController extends Controller
             $attributes['type_name'] = ProductType::find($attributes->product_type_id)->name;
             $display[] = $attributes;
         }
-        return view('createAttribute', ['attributes' => $display, 'type'=> $type]);
+        return view('createattribute', ['attributes' => $display, 'type'=> $type]);
     } 
 
     // Delete attributes Page
@@ -33,6 +33,6 @@ class AttributeController extends Controller
             'attribute' => strtolower($request->attribute),
             'price' => strtolower($request->price),
         ]);
-        return redirect()->route('createAttributes');
+        return redirect()->route('createattribute');
     }
 }
