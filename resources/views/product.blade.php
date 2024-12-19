@@ -33,7 +33,7 @@ use Illuminate\Support\Collection;
     <div class="row">
         <!-- Product Image -->
         <div class="col-md-6">
-            <img style="width:auto;" src="{{asset('storage/'.$prod->img)}}" alt="Product Image" class="product-image mb-4">
+            <img style="max-width: 100%;" src="{{asset('storage/'.$prod->img)}}" alt="Product Image" class="product-image mb-4">
         </div>
 
         <!-- Product Details -->
