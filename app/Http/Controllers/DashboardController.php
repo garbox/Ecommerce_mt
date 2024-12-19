@@ -23,7 +23,7 @@ class DashboardController extends Controller
     // Create product Page
     public function createProduct() {
         $prodType = ProductType::all();
-        return view('createProduct', ['prodType' => $prodType]);
+        return view('createproduct', ['prodType' => $prodType]);
     } 
 
     //Show Product
