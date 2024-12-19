@@ -41,12 +41,8 @@
             {{ucfirst($prodType->name)}}
           </form>
           </div>
-        </div>
-      
-         
-        
+          </div>
       </li>
-      
     @endforeach
     </div>
   </div>
