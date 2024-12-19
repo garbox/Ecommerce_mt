@@ -16,13 +16,13 @@ class AttributeController extends Controller
             $attributes['type_name'] = ProductType::find($attributes->product_type_id)->name;
             $display[] = $attributes;
         }
-        return view('createattribute', ['attributes' => $display, 'type'=> $type]);
+        return view('create attribute', ['attributes' => $display, 'type'=> $type]);
     } 
 
     // Delete attributes Page
     public function deleteAttributes(Request $request) {
         ProductAttribute::find($request->id)->delete();
-        return redirect()->route('createattributes');
+        return redirect()->route('create attributes');
     } 
 
      // Insert attribute 
@@ -33,6 +33,6 @@ class AttributeController extends Controller
             'attribute' => strtolower($request->attribute),
             'price' => strtolower($request->price),
         ]);
-        return redirect()->route('createattributes');
+        return redirect()->route('create attributes');
     }
 }
