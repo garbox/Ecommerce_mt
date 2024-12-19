@@ -23,7 +23,7 @@ class DashboardController extends Controller
     // Create product Page
     public function createProduct() {
         $prodType = ProductType::all();
-        return view('createproduct', ['prodType' => $prodType]);
+        return view('createProduct', ['prodType' => $prodType]);
     } 
 
     //Show Product
@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $display = collect();
         //find type name from product type ID and append to  new array
         foreach ($products as $products) {
-            $products['type_name'] = ProductType::find($products->product_type_id)->name;
+            $products['type_name']= ProductType::find($products->product_type_id)->name;
             $display[] = $products;
         }
         if($display->isEmpty()){
@@ -74,7 +74,7 @@ class DashboardController extends Controller
     //Show type
     public function showType(){
         $prodType = ProductType::all();
-        return view('createtype', ['prodType' => $prodType]);
+        return view('createType', ['prodType' => $prodType]);
     }
 
     // Insert type 
@@ -91,4 +91,10 @@ class DashboardController extends Controller
         $prodType = ProductType::all();
         return redirect()->route('createType');
     }    
+
+    public function editProducts(int $id){
+        $product = Product::find($id)->first();
+        $prodType = ProductType::all();
+        return view('dashboard.productEdit', ['product' => $product, 'prodType' => $prodType]);
+    }
 }
