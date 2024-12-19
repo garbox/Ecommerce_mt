@@ -54,7 +54,7 @@ Route::get('dashboard/createproduct', [DashboardController::class , 'createProdu
 Route::post('dashboard/createproduct', [DashboardController::class , 'insertProduct'])->middleware(Admin::class);
 
 // Dashbaord create type 
-Route::get('dashboard/createtype', [DashboardController::class , 'showType'])->name('createtype')->middleware(Admin::class);
+Route::get('dashboard/createtype', [DashboardController::class , 'showType'])->name('showtype')->middleware(Admin::class);
 Route::post('dashboard/createtype', [DashboardController::class , 'insertType'])->middleware(Admin::class);
 Route::post('dashboard/createtype/delete', [DashboardController::class , 'deleteType'])->middleware(Admin::class);
 
