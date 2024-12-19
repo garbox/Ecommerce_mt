@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\Admin;
@@ -44,12 +45,14 @@ Route::get('checkout', [CheckoutController::class , 'index'])->name("checkout")-
 /*Admin/Production Facing */
 //Dashboard 
 Route::get('dashboard', [DashboardController::class , 'index'])->name("dashboard")->middleware(Admin::class);
+Route::get('dashboard/order/{id}', [DashboardController::class , 'orderDetails'])->name("orderDetails")->middleware(Admin::class);
 
 // Dashboard Products
 Route::get('dashboard/products', [DashboardController::class , 'showProducts'])->name('products')->middleware(Admin::class);
 Route::get('dashboard/products/edit/{id}', [DashboardController::class , 'editProducts'])->name('productedit')->middleware(Admin::class);
 Route::post('dashboard/products/edit/update', [DashboardController::class , 'updateProducts'])->middleware(Admin::class);
 Route::post('dashboard/products/delete', [DashboardController::class , 'deleteProducts'])->middleware(Admin::class);
+Route::post('dashboard/status/update', [StatusController::class , 'update'])->middleware(Admin::class);
 
 Route::get('dashboard/createproduct', [DashboardController::class , 'createProduct'])->name('createproduct')->middleware(Admin::class);
 Route::post('dashboard/createproduct', [DashboardController::class , 'insertProduct'])->middleware(Admin::class);

@@ -33,6 +33,6 @@ class AttributeController extends Controller
             'attribute' => strtolower($request->attribute),
             'price' => strtolower($request->price),
         ]);
-        return redirect()->route('createattribute');
+        return redirect()->route('createattributes');
     }
 }
