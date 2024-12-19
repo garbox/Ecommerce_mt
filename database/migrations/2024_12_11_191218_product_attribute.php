@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('category');
             $table->string('attribute');
             $table->decimal('price', total: 8, places: 2);
-            $table->timestamp('created_at')->useCurrent();             
+            $table->timestamp('created_at')->useCurrent(); 
+            $table->timestamp('updated_at')->useCurrent();          
         });
     }
 

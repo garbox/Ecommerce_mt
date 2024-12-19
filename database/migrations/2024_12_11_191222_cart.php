@@ -17,7 +17,8 @@ return new class extends Migration
             $table->foreignIdFor(Product::class)->references('id')->on('products');
             $table->string('token_id');
             $table->integer('quantity')->default(1);
-            $table->timestamp('created_at')->useCurrent();         
+            $table->timestamp('created_at')->useCurrent();    
+            $table->timestamp('updated_at')->useCurrent();     
         });
     }
 

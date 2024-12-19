@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->timestamp('created_at')->useCurrent();  
+            $table->timestamp('updated_at')->useCurrent(); 
         });
     }
 

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('token');
             $table->string('session');
-            $table->timestamp('created_at')->useCurrent();         });
+            $table->timestamp('created_at')->useCurrent();         
+            $table->timestamp('updated_at')->useCurrent(); 
+        });
     }
 
     /**

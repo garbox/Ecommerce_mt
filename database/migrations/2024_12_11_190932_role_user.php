@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Foreign key to users table
             $table->foreignId('role_id')->constrained()->onDelete('cascade');  // Foreign key to roles table
             $table->timestamp('created_at')->useCurrent();  
+            $table->timestamp('updated_at')->useCurrent(); 
         });
     }
 

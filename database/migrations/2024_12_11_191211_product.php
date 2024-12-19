@@ -20,6 +20,7 @@ return new class extends Migration
             $table->mediumText('long_description');
             $table->string('img');
             $table->timestamp('created_at')->useCurrent(); 
+            $table->timestamp('updated_at')->useCurrent(); 
         });
     }
 

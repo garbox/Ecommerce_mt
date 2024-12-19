@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('password');
             $table->foreignIdFor(Role::class)->references('id')->on('roles')->default(2);
             $table->timestamp('created_at')->useCurrent();  
+            $table->timestamp('updated_at')->useCurrent();  
         });
     } 
 

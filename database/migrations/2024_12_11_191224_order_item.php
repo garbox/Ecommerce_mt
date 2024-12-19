@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Order::class)->references('id')->on('orders');
             $table->foreignIdFor(Cart::class)->references('id')->on('carts');
             $table->timestamp('created_at')->useCurrent();  
+            $table->timestamp('updated_at')->useCurrent(); 
         });
     }
 

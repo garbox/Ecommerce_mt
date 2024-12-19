@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name'); // State Name
             $table->string('abbreviation', 2); // State Abbreviation (max 2 characters)
             $table->timestamp("created_at")->useCurrent();
+            $table->timestamp('updated_at')->useCurrent(); 
         });
     }
 
