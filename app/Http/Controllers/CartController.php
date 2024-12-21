@@ -25,4 +25,17 @@ class CartController extends Controller
         Cart::remove($request);
         return redirect()->route('cart');
     }
+
+    public function updateCart(int $cartid, int $quantity){
+        $cart = Cart::find($cartid);
+        $cart->quantity = $quantity;
+
+        if($cart->save()){
+            return "Success";
+        }
+        else{
+            return "Error";
+        }
+
+    }
 }

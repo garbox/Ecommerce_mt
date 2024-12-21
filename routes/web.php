@@ -31,6 +31,7 @@ Route::get('/product/{id}', [ProductController::class , 'show']);
 Route::get('cart', [CartController::class , 'index'])->name("cart");
 Route::post('cart/add', [CartController::class , 'addToCart']);
 Route::post('cart/remove', [CartController::class , 'removeFromCart']);
+Route::get('cart/update/{cartid}/{qantity}', [CartController::class , 'updateCart']);
 
 //User Routes
 Route::get('/login', [UserController::class , 'login']);

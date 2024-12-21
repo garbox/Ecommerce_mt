@@ -34,9 +34,10 @@
                         <td>{{ $item['attArray']['legs'] ?? '' }}</td>
                         <td class="price">${{$item['price']}}</td>
                         <td>
-                            <input type="number" class="quantity form-control" value="{{$item['quantity']}}" min="1" style="width: 60px;">
+                            <input type="hidden" id='cartid' value="{{$item['cartID']}}" name='cartid'>
+                            <input onchange="updatecartAjax()" id="quantity" name='quantity' type="number" class="quantity form-control" value="{{$item['quantity']}}" min="1" style="width: 60px;">
                         </td>
-                        <td class="total">${{$item['price'] * $item['quantity']}}</td>
+                        <td class="total">${{number_format($item['price'] * $item['quantity'],2)}}</td>
                         <td>
                             <form action="/cart/remove" method="post" enctype="multipart/form-data">
                                 @csrf
@@ -49,7 +50,7 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-between">
-        <h4>Total: $<span id="cart-total">25.00</span></h4>
+        <h4>Total: $<span id="cart-total">0.00</span></h4>
         <a href="/checkout" class="btn btn-success">Proceed To Checkout</a>
     </div>
 </div>
@@ -81,6 +82,17 @@
         });
         document.getElementById('cart-total').textContent = total.toFixed(2);
     }
+
+    function updatecartAjax(){
+        console.log(this);
+        //var quantity = document.getElementById('quantity').value;
+       // var cartid = document.getElementById('cartid').value;
+        //const xhttp = new XMLHttpRequest();
+        //xhttp.open("GET", "cart/update/" + cartid + "/" + quantity);
+        //xhttp.send();
+        //console.log(xhttp.responseText);
+    }
+
 </script>
 
 </body>
