@@ -35,9 +35,9 @@
                         <td class="price">${{$item['price']}}</td>
                         <td>
                             <input type="hidden" id='cartid' value="{{$item['cartID']}}" name='cartid'>
-                            <input onchange="updatecartAjax()" id="quantity" name='quantity' type="number" class="quantity form-control" value="{{$item['quantity']}}" min="1" style="width: 60px;">
+                            <input onchange="updatecartAjax()" id="{{$item['cartID']}}" name='quantity' type="number" class="quantity form-control" value="{{$item['quantity']}}" min="1" style="width: 60px;">
                         </td>
-                        <td class="total">${{number_format($item['price'] * $item['quantity'],2)}}</td>
+                        <td class="total">${{number_format($item['price'] * $item['quantity'], 2)}}</td>
                         <td>
                             <form action="/cart/remove" method="post" enctype="multipart/form-data">
                                 @csrf
@@ -62,6 +62,7 @@
 
 <!-- Custom script to update total on quantity change -->
 <script>
+
     document.addEventListener('load', updateCartTotal());
     document.querySelectorAll('input[type="number"]').forEach(input => {
         input.addEventListener('change', function() {
@@ -69,7 +70,7 @@
             let price = parseFloat(row.cells[4].textContent.replace('$', ''));
             let quantity = parseInt(input.value);
             let total = price * quantity;
-            row.querySelector('.total').textContent = '$' + total.toFixed(2);
+            row.querySelector('.total').textContent = '$' + total.toLocaleString();
             updateCartTotal();
         });
     });
@@ -78,19 +79,36 @@
     function updateCartTotal() {
         let total = 0;
         document.querySelectorAll('.total').forEach(cell => {
-            total += parseFloat(cell.textContent.replace('$', ''));
+            total += parseFloat(cell.textContent.replace('$', '').replace(',',''));
         });
-        document.getElementById('cart-total').textContent = total.toFixed(2);
+        document.getElementById('cart-total').textContent = total.toLocaleString();
     }
 
+
+let isFunctionExecuted = false;
     function updatecartAjax(){
-        console.log(this);
-        //var quantity = document.getElementById('quantity').value;
-       // var cartid = document.getElementById('cartid').value;
-        //const xhttp = new XMLHttpRequest();
-        //xhttp.open("GET", "cart/update/" + cartid + "/" + quantity);
-        //xhttp.send();
-        //console.log(xhttp.responseText);
+        
+        document.addEventListener('change', function(event) {
+            if (isFunctionExecuted) {
+                return; // Prevent further execution if already run
+                console.log('this function has already ran.')
+            }
+            isFunctionExecuted = true;
+
+            // Your function logic here
+            var quantity = event.target.value;
+            var cartid = event.target.id;
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "cart/update/" + cartid + "/" + quantity);
+            xhttp.send();
+            console.log(xhttp.responseText);
+
+            // Reset flag after a brief period if needed (e.g., after processing the change)
+            setTimeout(() => {
+                isFunctionExecuted = false;
+            }, 100); // Reset flag after 100ms
+        });
+
     }
 
 </script>
