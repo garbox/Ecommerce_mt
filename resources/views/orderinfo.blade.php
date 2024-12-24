@@ -14,7 +14,7 @@
     <!-- Page Header -->
     <div class="text-center mb-4">
       <h1 class="display-4">Order Information</h1>
-      <p class="lead">Details for Order #{{$id}}</p>
+      <p class="lead">Details for Order #{{$orderDetails->order}}</p>
     </div>
 
     <!-- Order Details Section -->
@@ -27,10 +27,10 @@
             <h5 class="card-title">Order Summary</h5>
           </div>
           <div class="card-body">
-            <p><strong>Order ID:</strong> {{$id}}</p>
-            <p><strong>Order Date:</strong> {{date_format($orderInfo['created_at'],"m/d/Y");}}</p>
-            <p><strong>Status:</strong> {{$status->status}}</p>
-            <p><strong>Total Amount:</strong> ${{number_format($orderInfo['total_price'],2)}}</p>
+            <p><strong>Order ID:</strong> {{$orderDetails->order}}</p>
+            <p><strong>Order Date:</strong> {{date_format($orderDetails->orderdate,"m/d/Y");}}</p>
+            <p><strong>Status:</strong> {{$orderDetails->status->status}}</p>
+            <p><strong>Total Amount:</strong> ${{number_format($orderDetails->totalprice,2)}}</p>
           </div>
         </div>
       </div>
@@ -42,10 +42,10 @@
             <h5 class="card-title">Shipping Information</h5>
           </div>
           <div class="card-body">
-            <p><strong>Name:</strong> {{Auth::user()->name}}</p>
-            <p><strong>Address:</strong> {{Auth::user()->address .', '. Auth::user()->city .', '. Auth::user()->state .', '. Auth::user()->zip}}</p>
-            <p><strong>Phone:</strong> {{Auth::user()->phone}}</p>
-            <p><strong>Email:</strong> {{Auth::user()->email}}</p>
+            <p><strong>Name:</strong> {{$orderDetails->username}}</p>
+            <p><strong>Address:</strong> {{$orderDetails->address .', '. $orderDetails->city .', '. $orderDetails->state .', '. $orderDetails->zip}}</p>
+            <p><strong>Phone:</strong> {{$orderDetails->phone}}</p>
+            <p><strong>Email:</strong> {{$orderDetails->email}}</p>
           </div>
         </div>
       </div>
@@ -70,15 +70,15 @@
             </tr>
           </thead>
           <tbody>   
-            @foreach ($orderdetails as $product)
+            @foreach ($orderDetails->cart as $cart)
             <tr>
-              <td><a href='/product/{{$product["prodId"]}}'>{{$product['name']}}</a></td>
-              <td>{{ $product['attArray']['size'] ?? '' }}</td>
-              <td>{{ $product['attArray']['finish'] ?? '' }}</td>
-              <td>{{ $product['attArray']['legs'] ?? '' }}</td>
-              <td>{{$product['quantity']}}</td>
-              <td>${{number_format($product['price'],2)}}</td>
-              <td>${{number_format($product['price'] * $product['quantity'],2)}}</td>
+              <td><a href='/product/{{$cart["id"]}}'>{{$cart['prodname']}}</a></td>
+              <td>{{ $cart['prodAttr']['size'] ?? '' }}</td>
+              <td>{{ $cart['prodAttr']['finish'] ?? '' }}</td>
+              <td>{{ $cart['prodAttr']['legs'] ?? '' }}</td>
+              <td>{{$cart['quantity']}}</td>
+              <td>${{number_format($cart['price'],2)}}</td>
+              <td>${{number_format($cart['price'] * $cart['quantity'],2)}}</td>
             </tr>
             @endforeach
           </tbody>
@@ -92,8 +92,8 @@
         <h5 class="card-title">Tracking Information</h5>
       </div>
       <div class="card-body">
-        <p><strong>Shipping Status:</strong> {{$status->id < 5 ? "N/A" : $status->status ;}}</p>
-        <p><strong>Tracking Number:</strong> {{$status->id < 6 ? "N/A" : 'JDNV54285' ;}}</p>
+        <p><strong>Shipping Status:</strong> {{$orderDetails->status->status < 5 ? "N/A" : $orderDetails->status->status ;}}</p>
+        <p><strong>Tracking Number:</strong> {{$orderDetails->status->status < 6 ? "N/A" : 'JDNV54285' ;}}</p>
         <a href="#" class="btn btn-primary">Track Order</a>
       </div>
     </div>

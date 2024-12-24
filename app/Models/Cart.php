@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Product;
 use App\Models\CartAttribute;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Cart extends Model
 {
@@ -66,6 +67,16 @@ class Cart extends Model
         $request->legs == NULL ?  : CartAttribute::insert(['product_attribute_id'=> $request->legs, 'cart_id' =>$cartID]);
         $request->finish == NULL ? : CartAttribute::insert(['product_attribute_id'=> $request->finish, 'cart_id' =>$cartID]);
         
+    }
+
+    //take cart id and find the total price of the cart item with all customer requested attributes.
+    public static function getTotalPrice(int $cartid){
+
+        $totalPrice = CartAttribute::leftJoin('product_attributes', 'cart_attributes.product_attribute_id', '=', 'product_attributes.id')
+            ->where('cart_attributes.cart_id', $cartid)
+            ->sum('product_attributes.price');
+
+            return $totalPrice;          
     }
 
     public static function remove(Request $request){

@@ -32,9 +32,7 @@ class OrderController extends Controller
     // This function accepts an order ID as a parameter, verifies the order ID against the associated user ID, 
     // and then gathers all the necessary information related to the order in a nested array.
     public function details(int $id){
-        $orderInfo = Order::find($id);
-        $orderStatus = Status::find($orderInfo->status_id);
-        return view('/orderinfo', ['orderdetails' => Order::details($id), 'id' => $id, 'orderInfo' => $orderInfo, 'status' => $orderStatus]);
+        return view('/orderinfo', ['orderDetails' => Order::getDeatils2($id)]);
     }
 
 }

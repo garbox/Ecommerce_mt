@@ -145,6 +145,8 @@ class Order extends Model
             $cart->push([
                 'prodname' => $product->name,
                 'prodAttr' => $cartArray,
+                'price' => $product->price + Cart::getTotalPrice($orderItem->cart_id),
+                'id' => $cartProdId->id,
                 'quantity' => $cartProdId->quantity,
             ]);
         }
@@ -159,6 +161,7 @@ class Order extends Model
             "phone" => $user->phone,
             "email" => $user->email,
             "address" => $user->address,
+            "city" => $user->city,
             "zip" => $user->zip,
             "state" => $user->state,
             "cart" => $cart,
