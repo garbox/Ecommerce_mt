@@ -66,20 +66,20 @@
                             <tbody>
                             @foreach ($orders as $order)
                             <tr>
-                                    <td><a href="order/{{$order['id']}}">{{$order['id']}}</a></td>
+                                    <td><a href="order/{{$order->id}}">{{$order->id}}</a></td>
                                     <td>
-                                        @if ($order['status_id'] >= 6)
+                                        @if ($order->status_id >= 6)
                                         <span class="badge bg-success">
-                                        {{$order['status_id']}}
+                                        {{$order->status}}
                                         </span>
                                         @else
                                         <span class="badge bg-primary">
-                                            {{$order['status_id']}}
+                                            {{$order->status}}
                                         </span>
                                         @endif 
                                     </td>
-                                    <td>{{date_format($order['created_at'], "m/d/Y")}}</td>
-                                    <td>${{number_format($order['total_price'],2)}}</td>
+                                    <td>{{$order->created_at}}</td>
+                                    <td>${{number_format($order->total_price,2)}}</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -96,7 +96,7 @@
                         <p><strong>Name:</strong> {{$user['name']}}</p>
                         <p><strong>Email:</strong> {{$user['email']}}</p>
                         <p><strong>Phone:</strong> {{$user['phone']}}</p>
-                        <a href="#" class="btn btn-info">Edit Personal Info</a>
+                        <a href="#" class="btn btn-outline-primary ">Edit Personal Info</a>
                     </div>
                 </div>
 
