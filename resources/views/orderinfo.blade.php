@@ -71,8 +71,9 @@
           </thead>
           <tbody>   
             @foreach ($orderDetails->cart as $cart)
+
             <tr>
-              <td><a href='/product/{{$cart["id"]}}'>{{$cart['prodname']}}</a></td>
+              <td><a href='/product/{{$cart['productId']}}'>{{$cart['prodname']}}</a></td>
               <td>{{ $cart['prodAttr']['size'] ?? '' }}</td>
               <td>{{ $cart['prodAttr']['finish'] ?? '' }}</td>
               <td>{{ $cart['prodAttr']['legs'] ?? '' }}</td>

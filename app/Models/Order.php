@@ -143,6 +143,7 @@ class Order extends Model
 
             // set cart with product name and the cart array of attr
             $cart->push([
+                'productId' => $product->id,
                 'prodname' => $product->name,
                 'prodAttr' => $cartArray,
                 'price' => $product->price + Cart::getTotalPrice($orderItem->cart_id),
