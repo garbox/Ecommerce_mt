@@ -112,7 +112,7 @@
                 <div class="col-md-6 mb-3">
 
                     <!-- Payment Info -->
-                    <div class="card shadow-sm mb-3">
+                    <div class="card shadow-sm mb-3 d-none">
                         <div class="card-header">
                             <h4>Payment Infomation</h4>
                         </div>
