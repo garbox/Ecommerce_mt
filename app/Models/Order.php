@@ -23,6 +23,7 @@ class Order extends Model
         $prodAttrCost = 0;
         $orderId = Order::where('user_id', session()->get('id'))->where('id', $id)->first();
         $orderitem = OrderItem::where('order_id', $orderId['id'])->get();
+        $shippinginfo = Shipping::where('order_id', $orderId['id'])->get();
 
         foreach ($orderitem as $cart) {
             $prodId = Cart::find($cart->id);
@@ -51,7 +52,8 @@ class Order extends Model
         return $orderInfo;
     }
 
-    public static function create(Request $request) {
+    public static function create(Request $request) {     
+
         // get cart info (model function)
         $cart = Cart::get($request);
 
@@ -77,10 +79,10 @@ class Order extends Model
         Shipping::insert([
             'order_id' => $orderId,
             'user_id' => AUTH::user()->id,
-            'name' => $request->ship_name,
-            'address' => $request->ship_address,
+            'name' => ucwords($request->ship_name),
+            'address' => ucwords($request->ship_address),
             'zip' => $request->ship_zip,
-            'city' => $request->ship_city,
+            'city' => ucwords($request->ship_city),
             'state' => $request->ship_state,
         ]);
 
@@ -145,6 +147,7 @@ class Order extends Model
         $status = Status::find($order->status_id);
         $user = User::find($order->user_id);
         $orderItems = OrderItem::where('order_id' , $order->id)->get();
+        $shippingInfo = Shipping::where('order_id' ,  $order->id)->first();
 
         // create main cart array here -->
         foreach ($orderItems as $orderItem){
@@ -184,6 +187,7 @@ class Order extends Model
             "zip" => $user->zip,
             "state" => $user->state,
             "cart" => $cart,
+            'shippingInfo' => $shippingInfo,
         ];
 
         return (object) $orderDeets;

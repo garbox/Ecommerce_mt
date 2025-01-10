@@ -42,8 +42,8 @@
             <h5 class="card-title">Shipping Information</h5>
           </div>
           <div class="card-body">
-            <p><strong>Name:</strong> {{$orderDetails->username}}</p>
-            <p><strong>Address:</strong> {{$orderDetails->address .', '. $orderDetails->city .', '. $orderDetails->state .', '. $orderDetails->zip}}</p>
+            <p><strong>Name:</strong> {{$orderDetails->shippingInfo['name']}}</p>
+            <p><strong>Address:</strong> {{$orderDetails->shippingInfo['address'] .', '. $orderDetails->shippingInfo['city'] .', '. $orderDetails->shippingInfo['state'] .', '. $orderDetails->shippingInfo['zip']}}</p>
             <p><strong>Phone:</strong> {{$orderDetails->phone}}</p>
             <p><strong>Email:</strong> {{$orderDetails->email}}</p>
           </div>
