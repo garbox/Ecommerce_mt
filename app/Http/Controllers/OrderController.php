@@ -28,6 +28,7 @@ class OrderController extends Controller
         return view('orderstatus', ['user'=>Auth::user(), 'orders' => $orders]);
     }
 
+    //Creates order
     public  static function create(Request $request){
         Order::create($request);
         return redirect()->route('orderstatus');
@@ -38,9 +39,4 @@ class OrderController extends Controller
     public function details(int $id){
         return view('/orderinfo', ['orderDetails' => Order::getDeatils2($id)]);
     }
-
-    public function charge (){
-        return view('cctest',["user" => Auth::user(), "states" => State::all()]);
-    }
-
 }

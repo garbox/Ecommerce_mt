@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -51,21 +52,38 @@ class Order extends Model
     }
 
     public static function create(Request $request) {
+        // get cart info (model function)
         $cart = Cart::get($request);
+
+        //get cart total (model function)
         $totalPrice = Cart::getTotal($cart);
 
+        //insert into order table and get the ID 
         $orderId = Order::insertGetId([
             'total_price' => $totalPrice,
             'user_id' => session()->get('id'),
             'status_id' => 1,
         ]);
 
+        // insert into order items to keep track of individual items from order
         foreach ($cart as $item) {
             OrderItem::insert([
                 'order_id' => $orderId,
                 'cart_id' => $item['cartID'],
             ]);
         }
+
+        //insert shipping address (even if its the same as billing)
+        Shipping::insert([
+            'order_id' => $orderId,
+            'user_id' => AUTH::user()->id,
+            'name' => $request->ship_name,
+            'address' => $request->ship_address,
+            'zip' => $request->ship_zip,
+            'city' => $request->ship_city,
+            'state' => $request->ship_state,
+        ]);
+
         session()->regenerate();
     }
 
