@@ -17,7 +17,7 @@ class UserController extends Controller
     //
     public function index(){
         $user = User::find(session()->get('id'));
-        return view('usercreation' ,['stAbb' => State::getAbb(), 'user' => $user]);
+        return view('usercreation' ,['stAbb' => State::all(), 'user' => $user]);
     }
 
     //

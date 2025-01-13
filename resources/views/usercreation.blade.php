@@ -63,9 +63,9 @@
                                 <option >Select state</option>
                                 @foreach($stAbb as $stAbb)
                                     @if(isset($user->state) && $user->state == $stAbb->abbreviation))
-                                        <option value="{{$stAbb->abbreviation}}" selected >{{$stAbb->abbreviation}}</option>
+                                        <option value="{{$stAbb->id}}" selected >{{$stAbb->abbreviation}}</option>
                                     @else
-                                        <option value="{{$stAbb->abbreviation}}">{{$stAbb->abbreviation}}</option>
+                                        <option value="{{$stAbb->id}}">{{$stAbb->abbreviation}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -73,7 +73,6 @@
                                     <div style="color: red;">{{ $message }}</div>
                             @enderror
                         </div>
-
                          <!-- City Field -->
                          <div class="mb-3">
                             <label for="city" class="form-label">City</label>
