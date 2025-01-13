@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('total_price');
+            $table->float('total_price');
             $table->foreignIdFor(Status::class)->references('id')->on('statuses');
             $table->foreignIdFor(User::class)->references('id')->on('users');
             $table->timestamp('created_at')->useCurrent();    
