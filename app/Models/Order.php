@@ -53,7 +53,6 @@ class Order extends Model
     }
 
     public static function create(Request $request) {     
-
         // get cart info (model function)
         $cart = Cart::get($request);
 
