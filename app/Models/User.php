@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
+use Laravel\Cashier\Billable;
 class User extends Authenticatable
 {
+    use Billable;
     //
     public static function create(Request $request){
         $this->insert([

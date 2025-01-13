@@ -12,6 +12,7 @@ use App\Models\ProductAttribute;
 use App\Models\CartAttribute;
 use App\Models\Status;
 use App\Models\State;
+use App\Models\Payment;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +31,27 @@ class OrderController extends Controller
 
     //Creates order
     public  static function create(Request $request){
-        Order::create($request);
-        return redirect()->route('orderstatus');
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'zip' => 'required',
+            'state' => 'required',
+            'ship_name' => 'required',
+            'ship_address' => 'required',
+            'ship_city' => 'required',
+            'ship_zip' => 'required',
+            'ship_state' => 'required',
+        ]);
+        if(Payment::processPayment($request)){
+            Order::create($request);
+            return redirect()->route('orderstatus');
+        }
+        else {
+            return redirect()->route('checkout');
+        }
+        
     }
 
     // This function accepts an order ID as a parameter, verifies the order ID against the associated user ID, 

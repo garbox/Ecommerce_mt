@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
 use App\Http\Middleware\Production;
+use Illuminate\Http\Request;
 
 /*Customer Facing*/
 //Home
@@ -22,7 +23,7 @@ Route::get('/store', [StoreController::class , 'index']);
 
 Route::get('/orderstatus', [OrderController::class , 'index'])->name('orderstatus')->middleware(User::class);
 Route::get('/order/{id}', [OrderController::class , 'details'])->middleware(User::class);
-Route::get('/placeorder', [OrderController::class , 'create']);
+Route::post('/placeorder', [OrderController::class , 'create'])->middleware(User::class);
 
 //Product Page
 Route::get('/product/{id}', [ProductController::class , 'show']);
