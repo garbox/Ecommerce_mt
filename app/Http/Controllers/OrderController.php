@@ -44,8 +44,10 @@ class OrderController extends Controller
             'ship_zip' => 'required',
             'ship_state' => 'required',
         ]);
-        if(Payment::processPayment($request)){
-            Order::create($request);
+        
+        $payIntentId = Payment::processPayment($request);
+        if($payIntentId->status === "succeeded" ){
+            Order::create($request, $payIntentId);
             return redirect()->route('orderstatus');
         }
         else {

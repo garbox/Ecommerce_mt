@@ -7,6 +7,7 @@ use App\Models\CartAttribute;
 use App\Models\Cart;
 use App\Models\Status;
 use App\Models\OrderItem;
+use Laravel\Cashier\Payment; 
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,7 +53,7 @@ class Order extends Model
         return $orderInfo;
     }
 
-    public static function create(Request $request) {     
+    public static function create(Request $request, Payment $payIntentId) {     
         // get cart info (model function)
         $cart = Cart::get($request);
 
@@ -64,6 +65,7 @@ class Order extends Model
             'total_price' => $totalPrice,
             'user_id' => session()->get('id'),
             'status_id' => 1,
+            'stripe_payment_intent_id' => $payIntentId->id,
         ]);
 
         // insert into order items to keep track of individual items from order
@@ -92,7 +94,7 @@ class Order extends Model
         $alldtails = collect();
         $attrDetails = collect();
         $orders = DB::table('orders')
-            ->select('products.name as prodname', 'orders.total_price', 'orders.id as orderid', 'carts.id as cartid', 'users.id as userid', 'orders.status_id as status', 'orders.created_at as date')
+            ->select('products.name as prodname', 'orders.total_price', 'orders.stripe_payment_intent_id', 'orders.id as orderid', 'carts.id as cartid', 'users.id as userid', 'orders.status_id as status', 'orders.created_at as date')
             ->leftJoin('users', 'users.id', '=', 'orders.user_id')
             ->leftJoin('order_items', 'order_items.order_id', '=', 'orders.id')
             ->leftJoin('carts', 'carts.id', '=', 'order_items.cart_id')
@@ -132,6 +134,7 @@ class Order extends Model
                         'quantity' => $cart->quantity,
                         'status' => $status->status,
                         'date' => $date,
+                        'stripeTransId' => $order->stripe_payment_intent_id
 
                      ]);
                      $attrDetails=collect();

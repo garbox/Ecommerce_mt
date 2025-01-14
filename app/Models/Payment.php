@@ -18,12 +18,6 @@ class Payment extends Model
             $request->paymentMethodId, 
             ['return_url' => route('orderstatus')]
         );
-        
-        if($stripeCharge->status != 'succeeded'){
-            return $stripeCharge->error->message;
-        }
-        else {
-            return true;
-        }
+        return $stripeCharge;
     }
 }

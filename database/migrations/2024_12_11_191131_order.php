@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('total_price');
             $table->foreignIdFor(Status::class)->references('id')->on('statuses');
             $table->foreignIdFor(User::class)->references('id')->on('users');
+            $table->string('stripe_payment_intent_id');
             $table->timestamp('created_at')->useCurrent();    
             $table->timestamp('updated_at')->useCurrent(); 
         });

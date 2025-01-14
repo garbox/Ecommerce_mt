@@ -21,6 +21,7 @@
       <th scope="col">Invoice</th>
       <th scope="col">Status</th>
       <th scope="col">Date Ordered</th>
+      <th scope="col">Transaction</th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -31,6 +32,7 @@
     <td><a href="/dashboard/order/{{$order['orderId']}}">{{$order['orderId']}}</a></td>
     <td>{{$order['status']}}</td>
     <td>{{$order['date']}}</td>
+    <td><a href="https://dashboard.stripe.com/test/payments/{{$order['stripeTransId']}}" target="_blank">Transaction</a></td> 
     <td><a href="/dashboard/order/{{$order['orderId']}}"><button class="btn btn-sm btn-primary">Update Status</button></a></td>
     </tr>
     @endforeach

@@ -148,6 +148,8 @@
                     <div class="card shadow-sm mb-3">
                         <div class="card-header">
                             <h4>Payment Infomation</h4>
+                            <p>This is not a real payment portal, use the folllowing info</p>
+                            <li>Card: 4242 4242 4242 4242</li>
                         </div>
                         <div class="card-body">
                             <!-- Stripe Elements Placeholder -->
