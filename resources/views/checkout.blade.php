@@ -188,7 +188,13 @@
                             <div class="d-flex justify-content-between mt-10">
                                 <input type="hidden" id="paymentMethodId" name="paymentMethodId" value="">
                                 <input type="hidden" id="total" name="total" value="{{$total_price * 100}}">
-                                <button onclick="submitForm(event)" class="btn btn-primary w-100">Place Order</button>
+
+                                <button onclick="submitForm(event)" class="btn btn-primary w-100" id="placeorder">Place Order</button>
+                                
+                                <button class="btn btn-primary w-100 d-none" type="button" id="processing" disabled>
+                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    Processing...
+                                </button>
                             </form>
                             </div>
                         </div>
@@ -232,6 +238,13 @@
         <!--  Shipping Info Togglel -->
         <script>
             async function submitForm(event) {
+                //hide button and show loading 
+                // Hide the 'placeorder' button
+                document.getElementById('placeorder').style.display = 'none';
+                
+                // Show the 'processing' button
+                document.getElementById('processing').classList.remove('d-none');
+
                 event.preventDefault(); // Prevent the form from submitting immediately
 
                 // Get the form element by its ID
