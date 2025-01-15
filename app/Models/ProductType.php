@@ -12,9 +12,8 @@ class ProductType extends Model
     public function typename(int $id){
         return ProductType::find($id);
     }    
-    public function productattributes():HasMany
-
-    {
+    
+    public function productattributes():HasMany{
         return $this->hasMany(ProductAttribute::class);
     }
 }
