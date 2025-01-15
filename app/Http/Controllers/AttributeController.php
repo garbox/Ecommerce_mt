@@ -22,7 +22,7 @@ class AttributeController extends Controller
     // Delete attributes Page
     public function deleteAttributes(Request $request) {
         ProductAttribute::find($request->id)->delete();
-        return redirect()->route('createAttributes');
+        return redirect()->route('createattribute');
     } 
 
      // Insert attribute 
@@ -33,6 +33,6 @@ class AttributeController extends Controller
             'attribute' => strtolower($request->attribute),
             'price' => strtolower($request->price),
         ]);
-        return redirect()->route('createattributes');
+        return redirect()->route('createattribute');
     }
 }
