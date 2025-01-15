@@ -16,6 +16,8 @@ use App\Models\Payment;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\InvoiceEmail;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -47,7 +49,9 @@ class OrderController extends Controller
         
         $payIntentId = Payment::processPayment($request);
         if($payIntentId->status === "succeeded" ){
-            Order::create($request, $payIntentId);
+            $order = Order::create($request, $payIntentId);
+            $orderDetails = Order::getDeatils2($order);
+            Mail::to(Auth::user()->email)->send(new InvoiceEmail($orderDetails));
             return redirect()->route('orderstatus');
         }
         else {

@@ -88,6 +88,8 @@ class Order extends Model
         ]);
 
         session()->regenerate();
+
+        return $orderId;
     }
 
     public static function getOrderDetails($id){
