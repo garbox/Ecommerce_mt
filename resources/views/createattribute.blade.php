@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-sm">
         <h2>Create New Attribue</h2>
-            <form action="/dashboard/createattributes" method="post" enctype="multipart/form-data"> 
+            <form action="/dashboard/createattribute" method="post" enctype="multipart/form-data"> 
             @csrf
 
             <!-- Product Name -->

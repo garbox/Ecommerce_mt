@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
             <a class="nav-link" href="/dashboard/createtype">Create Type</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/dashboard/createattributes">Create Attributes</a>
+            <a class="nav-link" href="/dashboard/createattribute">Create Attributes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/user/logout">Log Out</a>
