@@ -32,17 +32,17 @@ class OrderController extends Controller
     //Creates order
     public  static function create(Request $request){
         $validated = $request->validate([
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'state' => 'required',
-            'ship_name' => 'required',
-            'ship_address' => 'required',
-            'ship_city' => 'required',
-            'ship_zip' => 'required',
-            'ship_state' => 'required',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|integer',
+            'state' => 'required|integer',
+            'ship_name' => 'required|string',
+            'ship_address' => 'required|string',
+            'ship_city' => 'required|string',
+            'ship_zip' => 'required|integer',
+            'ship_state' => 'required|integer',
         ]);
         
         $payIntentId = Payment::processPayment($request);

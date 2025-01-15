@@ -23,13 +23,13 @@ class UserController extends Controller
     //
     public function create(Request $request){
         $validated = $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
+            'name' => 'required|string',
+            'phone' => 'required|integer',
             'email' => 'required|unique:users',
-            'address' => 'required',
-            'city' => 'required',
-            'zip' => 'required',
-            'state' => 'required',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'zip' => 'required|integer',
+            'state' => 'required|integer',
             'password' => 'required|min:8',
         ]);
         

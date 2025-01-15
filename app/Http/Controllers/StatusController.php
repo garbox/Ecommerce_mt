@@ -9,7 +9,7 @@ class StatusController extends Controller
 {
     public function update(Request $request){
         $request->validate([
-            'status' => 'int',
+            'status' => 'integer',
         ]);
 
         $order = Order::find($request->orderid);
