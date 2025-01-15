@@ -240,9 +240,8 @@
             async function submitForm(event) {
                 //hide button and show loading 
                 // Hide the 'placeorder' button
-                document.getElementById('placeorder').style.display = 'none';
-                
                 // Show the 'processing' button
+                document.getElementById('placeorder').classList.add('d-none');
                 document.getElementById('processing').classList.remove('d-none');
 
                 event.preventDefault(); // Prevent the form from submitting immediately
@@ -264,6 +263,8 @@
                 // Check for errors from Stripe's API call
                 if (error) {
                     alert("Error: " + error.message);
+                    document.getElementById('placeorder').classList.remove('d-none');
+                    document.getElementById('processing').classList.add('d-none');
                     return; // Prevent form submission if there's an error
                 }
 
