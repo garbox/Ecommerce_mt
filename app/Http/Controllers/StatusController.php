@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Mail\StatusUpdateEmail;
+use Illuminate\Support\Facades\Mail;
+
 
 class StatusController extends Controller
 {
@@ -16,6 +19,8 @@ class StatusController extends Controller
         $order->status_id = $request->status;
 
         if ($order->save()){
+            $orderData = Order::getDeatils2($order->id);
+            Mail::to($orderData->email)->send(new StatusUpdateEmail($orderData));
             return back()->with('success', 'Status updated!');
         }
         else{
