@@ -63,7 +63,7 @@
                         <td>{{$attributes->type_name}}</td>
                         <td>${{$attributes->price}}</td>
                         <td>
-                            <form action="/dashboard/createattributes/delete" method="post">
+                            <form action="/dashboard/createattribute/delete" method="post">
                                 @csrf
                                 <button name="id" value="{{$attributes->id}}" class="btn btn-sm btn-outline-danger">Delete</button>
                             </form>
