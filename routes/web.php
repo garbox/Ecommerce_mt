@@ -63,9 +63,10 @@ Route::post('dashboard/createproduct', [DashboardController::class , 'insertProd
 Route::get('dashboard/createtype', [DashboardController::class , 'showType'])->name('showtype')->middleware(Admin::class);
 Route::post('dashboard/createtype', [DashboardController::class , 'insertType'])->middleware(Admin::class);
 Route::post('dashboard/createtype/delete', [DashboardController::class , 'deleteType'])->middleware(Admin::class);
+Route::get('invoice', [InvoiceController::class , 'index'])->middleware(Admin::class);
 
 
 //Dashboard Create Attributes
-Route::get('dashboard/createattributes', [AttributeController::class , 'createAttributes'])->name('createattributes')->middleware(Admin::class);
-Route::post('dashboard/createattributes', [AttributeController::class , 'insertAttribute'])->middleware(Admin::class);
-Route::post('dashboard/createattributes/delete', [AttributeController::class , 'deleteAttributes'])->middleware(Admin::class);
+Route::get('dashboard/createattribute', [AttributeController::class , 'createAttributes'])->name('createattribute')->middleware(Admin::class);
+Route::post('dashboard/createattribute', [AttributeController::class , 'insertAttribute'])->middleware(Admin::class);
+Route::post('dashboard/createattribute/delete', [AttributeController::class , 'deleteAttributes'])->middleware(Admin::class);
