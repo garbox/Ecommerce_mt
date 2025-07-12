@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
@@ -27,5 +28,11 @@ class Product extends Model
         }
         
         $product->save(); 
+    }
+
+    //relationship
+
+    public function type(): BelongsTo{
+        return $this->belongsTo(ProductType::class, 'product_type_id');
     }
 }
