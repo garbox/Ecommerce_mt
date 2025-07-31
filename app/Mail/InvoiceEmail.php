@@ -22,7 +22,7 @@ class InvoiceEmail extends Mailable
 
     public function envelope(): Envelope{
         return new Envelope(
-            subject: 'This is test email from Modern Tables',
+            subject: 'Thank you for your order!',
         );
     }
 
@@ -35,6 +35,7 @@ class InvoiceEmail extends Mailable
     public function build()
     {
         return $this->view('email.invoice')
-                    ->with('data', $this->data);
+                    ->with('data', $this->data)
+                    ->from('sales@garboxcreations.com', 'Modern Tables');
     }
 }

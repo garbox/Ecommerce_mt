@@ -94,7 +94,7 @@ class DashboardController extends Controller
     }    
 
     public function editProducts(int $id){
-        $product = Product::find($id)->first();
+        $product = Product::find($id);
         $prodType = ProductType::all();
         return view('dashboard.productEdit', ['product' => $product, 'prodType' => $prodType]);
     }

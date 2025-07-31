@@ -57,16 +57,21 @@ class Cart extends Model
     }
 
     public static function add(Request $request){
+        $individualAttributes = $request->collect()->except(['_token', 'finalPrice','productID', 'quantity'])->all();
+        $attr = collect();
         $cartID = Cart::insertGetId([
             'quantity' => $request->quantity,
-            'Product_id' => $request->productID,
+            'product_id' => $request->productID,
             'token_id' => session()->get('_token'),
         ]);
 
-        $request->size == NULL ?  : CartAttribute::insert(['product_attribute_id'=> $request->size, 'cart_id' =>$cartID]);
-        $request->legs == NULL ?  : CartAttribute::insert(['product_attribute_id'=> $request->legs, 'cart_id' =>$cartID]);
-        $request->finish == NULL ? : CartAttribute::insert(['product_attribute_id'=> $request->finish, 'cart_id' =>$cartID]);
-        
+        foreach ($individualAttributes as $attributeValue) {
+            $attr->push([
+                'cart_id' => $cartID,
+                'product_attribute_id' => $attributeValue
+            ]);
+        }
+        CartAttribute::insert($attr->toArray());        
     }
 
     //take cart id and find the total price of the cart item with all customer requested attributes.
