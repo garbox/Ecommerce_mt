@@ -16,8 +16,6 @@
   <thead>
     <tr>
       <th scope="col">Name</th>
-      <th scope="col">Short Desc</th>
-      <th scope="col">Long Desc</th>
       <th scope="col">Type</th>
       <th scope="col">Price</th>
       <th scope="col">Img</th>
@@ -30,8 +28,6 @@
       @foreach ($products as $products)
       <tr>
         <td>{{$products->name}}</td>
-        <td>{{$products->short_description}}</td>
-        <td>{{$products->long_description}}</td>
         <td>{{$products->type_name}}</td>
         <td>{{$products->price}}</td>
         <td>{{$products->img}}</td>

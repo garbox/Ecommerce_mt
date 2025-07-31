@@ -11,7 +11,7 @@
   <x-navigation />
 
     <!-- Product Grid -->
-    <div class="container my-5" style='height: 58vh'>
+    <div class="container my-5">
         <div class="row">
             <!-- Products-->
             @foreach ($prod as $prod)

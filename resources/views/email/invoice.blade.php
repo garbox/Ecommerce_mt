@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +32,8 @@
             margin: 0;
         }
 
-        .invoice-table th, .invoice-table td {
+        .invoice-table th,
+        .invoice-table td {
             text-align: left;
             padding: 8px 12px;
         }
@@ -52,6 +54,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="invoice-container">
@@ -72,14 +75,15 @@
                 <div class="col-6">
                     <p><strong>Bill To:</strong></p>
                     <p>{{$data->username}}<br>
-                    {{$data->address}}<br>
-                    {{$data->city}}, {{$data->state}}, {{$data->zip}}</p>
+                        {{$data->address}}<br>
+                        {{$data->city}}, {{$data->state}}, {{$data->zip}}
+                    </p>
                 </div>
                 <div class="col-6 text-end">
                     <p><strong>From:</strong></p>
                     <p>Modern Tables.<br>
-                    1 Main Street<br>
-                    Business City, BC</p>
+                        1 Main Street<br>
+                        Business City, BC</p>
                 </div>
             </div>
 
@@ -99,9 +103,15 @@
                     <tr>
                         <td>{{$cart['prodname']}}</td>
                         <td>
-                        @foreach ($cart['prodAttr'] as $key => $value) 
-                            {{$key}} : {{$value }} <br>
-                        @endforeach
+                            <table>
+                                @foreach ($cart['prodAttr'] as $key => $value)
+                                <tr>
+                                    <td>{{ucwords($key)}}:</td>
+                                    <td>{{ucwords($value)}}</td>
+                                </tr>
+                                @endforeach
+                            </table>
+                            <br>
                         </td>
                         <td>{{$cart['quantity']}}</td>
                         <td>${{$cart['price']}}</td>
@@ -122,4 +132,5 @@
         </div>
     </div>
 </body>
+
 </html>

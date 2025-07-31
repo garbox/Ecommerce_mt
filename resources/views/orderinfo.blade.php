@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Order Information</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body class="d-flex flex-column min-vh-100">
-<x-navigation/>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <x-navigation />
 
   <div class="container my-5">
     <!-- Page Header -->
@@ -19,7 +21,7 @@
 
     <!-- Order Details Section -->
     <div class="row">
-        
+
       <div class="col-md-6">
         <!-- Order Info Card -->
         <div class="card">
@@ -60,23 +62,27 @@
         <table class="table table-striped">
           <thead>
             <tr>
-                <th scope="col">Item</th>
-                <th scope="col">Size</th>
-                <th scope="col">Finish</th>
-                <th scope="col">Legs</th>
-                <th scope="col">Quantity</th>
+              <th scope="col">Item</th>
+              <th scope="col">Customized Features</th>
+              <th scope="col">Quantity</th>
               <th scope="col">Unit Price</th>
               <th scope="col">Total Price</th>
             </tr>
           </thead>
-          <tbody>   
+          <tbody>
             @foreach ($orderDetails->cart as $cart)
-
             <tr>
               <td><a href='/product/{{$cart['productId']}}'>{{$cart['prodname']}}</a></td>
-              <td>{{ $cart['prodAttr']['size'] ?? '' }}</td>
-              <td>{{ $cart['prodAttr']['finish'] ?? '' }}</td>
-              <td>{{ $cart['prodAttr']['legs'] ?? '' }}</td>
+              <td>
+                <table>
+                  @foreach ($cart['prodAttr'] as $key => $value)
+                  <tr>
+                    <td>{{ ucwords($key) }}: </td>
+                    <td>{{ ucwords($value) }}</td>
+                  </tr>
+                  @endforeach
+                </table>
+              </td>
               <td>{{$cart['quantity']}}</td>
               <td>${{number_format($cart['price'],2)}}</td>
               <td>${{number_format($cart['price'] * $cart['quantity'],2)}}</td>
@@ -100,10 +106,11 @@
     </div>
   </div>
 
-  <x-footer/>
+  <x-footer />
 
   <!-- Bootstrap 5 JS (Optional for interactive elements) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
