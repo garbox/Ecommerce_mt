@@ -10,12 +10,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
 {
-    public function carts():HasMany
+    protected $fillable = ['name', 'short_description', 'price', 'product_type_id', 'long_description'];
+    public static function updateProduct(Request $request)
     {
-        return $this->hasMany(Cart::class);
-    }
-
-    public static function updateProduct(Request $request) {
         $product = Product::find($request->productId);
         $product->name = $request->productName;
         $product->short_description = $request->shortDescription;
@@ -23,16 +20,31 @@ class Product extends Model
         $product->price = $request->productPrice;
         $product->product_type_id = $request->productCategory;
 
-        if($request->productImage !=null){
+        if ($request->productImage != null) {
             $product->img = $request->productImage;
         }
-        
-        $product->save(); 
+
+        $product->save();
     }
 
     //relationship
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
 
-    public function type(): BelongsTo{
+    public function type(): BelongsTo
+    {
         return $this->belongsTo(ProductType::class, 'product_type_id');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class)->orderBy('order');
+    }
+
+    public function mainPhoto()
+    {
+        return $this->hasOne(Photo::class)->where('order', 1);
     }
 }

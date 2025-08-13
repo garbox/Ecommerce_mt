@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('price');
             $table->string('product_type_id');
             $table->mediumText('long_description');
-            $table->string('img');
             $table->timestamp('created_at')->useCurrent(); 
             $table->timestamp('updated_at')->useCurrent(); 
         });

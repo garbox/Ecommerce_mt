@@ -9,9 +9,8 @@ class ProductController extends Controller
     //product index
     public function show(int $id)
     {
-        $product = Product::with('type.productattributes')->find($id);
+        $product = Product::with('photos', 'type.productattributes')->find($id);
         if (!$product) {
-            // Option 1: Redirect to a 404 page
             abort(404, 'Product not found');
         }
         $group = $product->type->productattributes->groupBy('category');

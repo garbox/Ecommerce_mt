@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-
-use Illuminate\Support\Collection;
-?>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Modern Tables Store</title>
+
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
   <style>
     .product-card {
       border: 1px solid #ddd;
@@ -20,9 +18,13 @@ use Illuminate\Support\Collection;
     }
 
     .product-image {
-      height: 400px;
       object-fit: cover;
       border-radius: 10px;
+    }
+
+    .clickable-image {
+      max-width: 20%;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -31,21 +33,39 @@ use Illuminate\Support\Collection;
   <!-- Navbar -->
   <x-navigation />
 
-  <!-- Product List Section -->
+  <!-- Product Section -->
   @empty($prod)
   <div class="container my-5">
     <div class="row">
       <p>Product not found</p>
     </div>
-
   </div>
   @endempty
+
   @isset($prod)
   <div class="container my-5">
     <div class="row">
-      <!-- Product Image -->
-      <div class="col-md-6">
-        <img style="max-width: 100%;" src="{{asset('storage/'.$prod->img)}}" alt="Product Image" class="product-image mb-4">
+
+      <!-- Left: Images and Description -->
+      <div class="col-md-6 p-5">
+
+        {{-- Main Image and Thumbnails --}}
+        @foreach($prod->photos as $photo)
+          @if($photo->order == 1)
+            <img
+              id="mainImage"
+              src="{{ asset('storage/' . $photo->filename) }}"
+              alt="Product Image"
+              class="product-image mb-4"
+              style="max-width: 100%;" />
+          @else
+            <img
+              src="{{ asset('storage/' . $photo->filename) }}"
+              alt="Product Image"
+              class="product-image mb-4 clickable-image"
+              style="max-width: 20%;" />
+          @endif
+        @endforeach
 
         <!-- Product Description -->
         <p class="product-description">
@@ -53,47 +73,56 @@ use Illuminate\Support\Collection;
         </p>
       </div>
 
-      <!-- Product Details -->
-      <div class="col-md-6">
+      <!-- Right: Product Details and Customization -->
+      <div class="col-md-6 p-5">
 
-        <!-- Product Title -->
-        <h1 class="product-title">{{$prod->name}}</h1>
+        <h1 class="product-title">{{ $prod->name }}</h1>
 
-        <!-- Product Price -->
         <p>Price:</p>
-        <p id="price" value="{{$prod->price}}" class="price">${{$prod->price}}</p>
+        <p id="price" class="price" value="{{ $prod->price }}">${{ $prod->price }}</p>
         <hr>
-        <p><b>Customize your {{$prod->name}}</b></p>
-        <p style="display:none" id="baseprice" value="{{$prod->price}}" class="price">{{$prod->price}}</p>
 
-        <!-- product attributes listed -->
+        <p><strong>Customize your {{ $prod->name }}</strong></p>
+        <p id="baseprice" class="price" value="{{ $prod->price }}" style="display:none;">{{ $prod->price }}</p>
+
         <form action="/cart/add" method="post" enctype="multipart/form-data">
           @csrf
           <div class="mb-3">
 
+            {{-- Dynamic Selects for Attributes --}}
             @foreach ($group as $category => $attributes)
-            <div class="mb-3">
-              <label for="{{ $category }}" class="form-label">{{ ucwords($category) }}:</label>
-              <select id="{{ $category }}" name="{{ $category }}" class="form-select">
-                @foreach ($attributes as $attribute)
-                <option price="{{$attribute->price}}" value="{{ $attribute->id }}">
-                  {{ ucwords($attribute->attribute) }} - ${{ $attribute->price }}
-                </option>
-                @endforeach
-              </select>
-            </div>
+              <div class="mb-3">
+                <label for="{{ $category }}" class="form-label">{{ ucwords($category) }}:</label>
+                <select id="{{ $category }}" name="{{ $category }}" class="form-select">
+                  @foreach ($attributes as $attribute)
+                    <option price="{{ $attribute->price }}" value="{{ $attribute->id }}">
+                      {{ ucwords($attribute->attribute) }} - ${{ $attribute->price }}
+                    </option>
+                  @endforeach
+                </select>
+              </div>
             @endforeach
 
-            <input type="hidden" value="" name="finalPrice" id="finalPrice" />
-            <input type="hidden" value="{{$prod->id}}" name="productID" id="productID" />
+            <input type="hidden" name="finalPrice" id="finalPrice" value="" />
+            <input type="hidden" name="productID" id="productID" value="{{ $prod->id }}" />
 
-            <label for="legs" class="form-label">Quantity</label>
-            <input onchange="ChangeFunction()" id="quantity" type="number" name="quantity" class="form-control" value="1" min="1" style="width: 60px;">
-            <hr>
+            <label for="quantity" class="form-label">Quantity</label>
+            <input
+              id="quantity"
+              name="quantity"
+              type="number"
+              min="1"
+              value="1"
+              class="form-control"
+              style="width: 60px;"
+              onchange="ChangeFunction()" />
+
+            <hr />
             <button type="submit" class="btn btn-primary">Add To Cart</button>
           </div>
         </form>
       </div>
+
     </div>
   </div>
   @endisset
@@ -106,66 +135,79 @@ use Illuminate\Support\Collection;
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", () => {
+      // Price calculation setup
       const quantityInput = document.getElementById("quantity");
       const basePriceElement = document.getElementById("baseprice");
       const finalPriceElement = document.getElementById("finalPrice");
       const totalPriceElement = document.getElementById("price");
 
-      const selects = [
+      // Collect category IDs for selects
+      const categories = [
         @foreach($group as $category => $attributes)
-        '{{ $category }}',
+          '{{ $category }}',
         @endforeach
       ];
 
-      // Attach event listeners to each select
-      selects.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.addEventListener('change', updatePrices);
+      // Attach 'change' event listeners to attribute selects
+      categories.forEach(id => {
+        const selectElement = document.getElementById(id);
+        if (selectElement) {
+          selectElement.addEventListener('change', updatePrices);
         }
       });
 
-      // Listen for quantity changes
+      // Listen for quantity input changes
       if (quantityInput) {
         quantityInput.addEventListener('input', updatePrices);
       }
 
-      // Initial price calculation
+      // Initial price update on load
       updatePrices();
 
       function updatePrices() {
         let totalAddOns = 0;
 
-        selects.forEach(id => {
-          const el = document.getElementById(id);
-          if (el) {
-            const selectedOption = el.options[el.selectedIndex];
-            const priceAttr = selectedOption.getAttribute("price") || selectedOption.price;
+        categories.forEach(id => {
+          const select = document.getElementById(id);
+          if (select) {
+            const selectedOption = select.options[select.selectedIndex];
+            const priceAttr = selectedOption.getAttribute("price") || "0";
             const price = parseFloat(priceAttr) || 0;
             totalAddOns += price;
           }
         });
 
-        const basePrice = parseFloat(basePriceElement?.innerHTML || 0);
-        const quantity = parseInt(quantityInput?.value || 1);
+        const basePrice = parseFloat(basePriceElement?.textContent || "0") || 0;
+        const quantity = parseInt(quantityInput?.value || "1", 10);
 
         const unitPrice = basePrice + totalAddOns;
         const totalPrice = unitPrice * quantity;
 
-        // Update UI
         if (totalPriceElement) {
-          totalPriceElement.innerHTML = "$" + totalPrice.toFixed(2);
+          totalPriceElement.textContent = `$${totalPrice.toFixed(2)}`;
         }
-
         if (finalPriceElement) {
-          finalPriceElement.innerHTML = "$" + unitPrice.toFixed(2);
-          finalPriceElement.value = unitPrice;
+          finalPriceElement.value = unitPrice.toFixed(2);
+          finalPriceElement.textContent = `$${unitPrice.toFixed(2)}`;
         }
       }
     });
-  </script>
 
+    // Image swapping logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const mainImage = document.getElementById('mainImage');
+      const thumbnails = document.querySelectorAll('.clickable-image');
+
+      thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+          // Swap the src and alt attributes between main image and clicked thumbnail
+          [mainImage.src, thumbnail.src] = [thumbnail.src, mainImage.src];
+          [mainImage.alt, thumbnail.alt] = [thumbnail.alt, mainImage.alt];
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

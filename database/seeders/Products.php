@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,13 +12,22 @@ class Products extends Seeder
      */
     public function run(): void
     {
-        DB::table('products')->insert([
+        // Insert product and get its ID
+        $productId = DB::table('products')->insertGetId([
             'name' => "Walnut Night Stand",
             'short_description' => "This is a short description of product",
             'long_description' => "This is a long description of product",
             'product_type_id' => 1,
             'price'=> 299,
-            'img' => 'walnut_nightstand.png'
+        ]);
+
+        // Insert photo linked to product
+        DB::table('photos')->insert([
+            'product_id' => $productId,
+            'filename' => 'walnut_nightstand.png',
+            'order' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }
