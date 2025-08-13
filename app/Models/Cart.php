@@ -23,7 +23,7 @@ class Cart extends Model
                 
         foreach($carts as $cart){
             $cartAtt = CartAttribute::where('cart_id', $cart->id)->get();
-            $prod = Product::find($cart->product_id);
+            $prod = Product::with('mainPhoto')->find($cart->product_id);
 
             foreach ($cartAtt as $cartAtt) {
                 $prodAtt = ProductAttribute::where('id', $cartAtt->product_attribute_id)->first();
@@ -36,7 +36,8 @@ class Cart extends Model
                 'price' => $attCost + $prod->price,
                 'cartID' => $cart->id,
                 'quantity' => $cart->quantity,
-                'attArray' => $attArray
+                'attArray' => $attArray,
+                'img' => $prod->mainPhoto->filename
             ]);
             //rest place hodlers
 
